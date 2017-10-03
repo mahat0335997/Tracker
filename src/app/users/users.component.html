@@ -1,0 +1,10 @@
+<p>
+  users works!
+</p>
+
+<button (click)="getUser()"> Users </button>
+<ol>
+  <li *ngFor="let user of Users | async" >
+    {{ user }}
+  </li>
+</ol>

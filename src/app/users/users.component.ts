@@ -1,37 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AuthService } from './auth.service';
-
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { User } from './users/user'
+import { User } from './user'
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
 })
-export class AppComponent implements OnInit {
-  email: string;
-  password: string;
+export class UsersComponent implements OnInit {
+
   private basePath: string = '/Users';
   users: FirebaseListObservable<User[]>;
   user: FirebaseObjectObservable<User>;
 
-  constructor(public authService: AuthService, public db: AngularFireDatabase) {}
-
-  signup() {
-    this.authService.signup(this.email, this.password);
-    this.email = this.password = '';
-  }
-
-  login() {
-    this.authService.login(this.email, this.password);
-    this.email = this.password = '';    
-  }
-
-  logout() {
-    this.authService.logout();
-  }
+  constructor(public db: AngularFireDatabase) { }
 
   addTodo(value: string): void {
     this.users.push({ content: value, done: false });
@@ -57,9 +39,7 @@ export class AppComponent implements OnInit {
     return this.user
   }
 
-
   ngOnInit() {
-  
   }
 
 }
